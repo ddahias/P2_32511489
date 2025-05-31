@@ -3,69 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alquiler de Equipo deportivo - Puerto Colombia </title>
+    <title>Alquiler de Equipo Deportivo - Puerto Colombia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <%- include('fragmen/header.ejs')%>
+    <%- include('fragmen/header.ejs') %>
     <main>
-        <section id="hero" class="hero">
-            <div class="container hero__content">
-                <h2>Tu Aventura Comienza Aquí</h2>
-                <p>Alquila el mejor equipo deportivo y descubre las rutas turísticas más emocionantes.</p>
-            </div>
-            <div class="header-images">
-            <img src="img/bicicletas-footer.jpg" alt="Bicicleta de paseo">
-            <img src="img/playa.jpg" alt="Bicicleta de paseo">
-        
-        </div>
-
+        <div class="home opa">
+                <h1>Tu Aventura Comienza Aquí</h1>
+                <p class="subtitle">Alquila el mejor equipo deportivo y descubre las rutas turísticas más emocionantes.</p>
+                <div class="cta-buttons">
+                    <a href="/servicios" class="btn btn-primary">Nuestros Servicios <i class="fa-solid fa-box"></i></a>
+                    <a href="/contacto" class="btn btn-light">Necesitas Asesoría <i class="fa-solid fa-pencil-alt"></i></a>
+                </div>
+            </div>    
         </section>
-
-        <section id="equipment" class="equipment">
-            <div class="container">
-                <h2>Alquiler de Equipo Deportivo</h2>
-                <p class="equipment__description" style="text-align: center; margin-bottom: 3rem;">Tenemos todo lo que necesitas para tu próxima aventura: bicicletas, kayaks y rutas guiadas.</p>
-                <div class="grid equipment__grid">
-                    <div class="item equipment__item">
-                        <img src="img/bici-paseo.jpg" alt="Imagen de una bicicleta de montaña">
-                        <h3>Bicicletas</h3>
-                        <p>Variedad para montaña y de paseo.</p>
+    
+        <section>
+            <div class="beneficios">
+                <h2>¿Por Qué Elegir Nuestro Servicio?</h2>
+                <div class="reasons-grid">
+                    <div class="reason-item">
+                        <i class="fa-solid fa-bicycle"></i>
+                        <h3>Variedad de Equipos</h3>
+                        <p>Ofrecemos una amplia gama de bicicletas, kayaks y más para todas tus aventuras.</p>
                     </div>
-                    <div class="item equipment__item">
-                        <img src=" /img/kayy.jpg" alt="Imagen de un kayak">
-                        <h3>Kayaks<h3>
+                    <div class="reason-item">
+                        <i class="fa-solid fa-user-check"></i>
+                        <h3>Asesoría Personalizada</h3>
+                        <p>Nuestro equipo está listo para ayudarte a elegir el equipo perfecto para ti.</p>
+                    </div>
+                    <div class="reason-item">
+                        <i class="fa-solid fa-map"></i>
+                        <h3>Rutas Guiadas</h3>
+                        <p>Descubre las mejores rutas turísticas con nuestros guías expertos.</p>
+                    </div>
+                    <div class="reason-item">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <h3>Calidad Garantizada</h3>
+                        <p>Todos nuestros equipos son revisados y mantenidos para asegurar tu seguridad y satisfacción.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-
-<section id="routes" class="routes">
-    <div class="container">
-        <h2>Rutas Turísticas</h2>
-        <p class="routes__description" style="text-align: center; margin-bottom: 3rem;">Descubre la belleza local con nuestras rutas guiadas.</p>
-        <div class="routes__image-placeholder" style="text-align: center; padding: 2rem; border: 1px dashed #ccc; margin-bottom: 2rem;">
-
-            <img src="/img/reno.jpg" alt="Imagen de Rutas Turísticas">
-        </div>
-        <p style="text-align: center;"><a href="/rutas" class="btn">Ver Todas Las Rutas</a></p>
-    </div>
-</section>
-
-
-        <section id="contact-cta" class="contact-cta" style="text-align: center; padding: 4rem 0; background-color: #e0f2f7;">
-            <div class="container contact-cta__content">
-                <h2>¿Listo para tu Próxima Aventura?</h2>
-                <p>Contáctanos para más información o para reservar tu equipo o ruta.</p>
-                <a href="/contacto" class="btn">Contactar</a>
+    
+        <section style="background-image: url('https://images.pexels.com/photos/13198197/pexels-photo-13198197.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');padding: auto;">
+            <div class="opa">
+                <h2>Nuestra Trayectoria</h2>
+                <div class="trajectory-content">
+                    <p>Nos preocupamos por ofrecer un servicio cálido y amable. Al elegirnos, no solo alquilas equipo, sino que te unes a una comunidad que ama la aventura.</p>
+                    <p>Hoy, somos sinónimo de compromiso con la calidad y la satisfacción del cliente.</p>
+                </div>
             </div>
         </section>
-
+    
+        <section id="services-summary" class="section bg-light">
+            <div class="container">
+                <h2>Ofrecemos</h2>
+                <div class="service-types">
+                    <div class="service-type-item">
+                        <i class="fa-solid fa-bicycle"></i>
+                        <h3>Alquiler de Bicicletas</h3>
+                        <p>Variedad para montaña y de paseo.</p>
+                    </div>
+                    <div class="service-type-item">
+                        <i class="fa-solid fa-water"></i>
+                        <h3>Alquiler de Kayaks</h3>
+                        <p>Disfruta de la experiencia en el agua.</p>
+                    </div>
+                </div>
+                <p class="text-center">
+                    <a href="/servicios" class="btn btn-primary">Ver Listado de Servicios</a>
+                </p>
+            </div>
+        </section>
+    
+        <section class="info-extra">
+            <h2>¿Listo para tu Próxima Aventura?</h2>
+            <p>¡No esperes más! Contáctanos o visítanos para un asesoramiento rápido.</p>
+            <a href="/contacto" class="btn btn-light btn-large">¡Contáctanos Ahora! <i class="fa-solid fa-paper-plane"></i></a>
+        </section>
     </main>
-
-    <footer>
-        <%- include('fragmen/footer.ejs')%> 
-    </footer>
+    <%- include('fragmen/footer.ejs') %>
 </body>
 </html>

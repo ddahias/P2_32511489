@@ -1,34 +1,41 @@
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="/css/header.css">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPY841KFTW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-
-<style>
-  nav {
-    text-align: center;
-    background-color: #005f73; /* Azul más oscuro */
-    padding: 10px 0;
-  }
-  nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: inline-block;
-  }
-  nav ul li {
-    display: inline;
-    margin: 0 15px;
-  }
-  nav a {
-    text-decoration: none;
-    color: #fff; /* Texto blanco para contrastar */
-  }
-
-</style>
-
+      gtag('config', 'G-MPY841KFTW');
+    </script>
+    </head>
 <nav>
-  <ul>
-    <li><a href="/">Inicio</a></li>
-    <li><a href="/servicios">Servicios</a></li>
-    <li><a href="/contacto">Contacto</a></li>
-    <li><a href="/admin/contacts">Ver Contactos</a></li>
-  </ul>
+    <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+
+    <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/servicios">Servicios</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+        <li><a href="/admin/contacts">Ver Contactos</a></li>
+    </ul>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navUl = document.querySelector('nav ul'); // Selecciona la lista de navegación
+
+        if (menuToggle && navUl) {
+            menuToggle.addEventListener('click', () => {
+                navUl.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+            });
+
+            document.addEventListener('click', (event) => {
+                // Si el clic no fue en el botón de hamburguesa ni dentro del menú, y el menú está abierto
+                if (!menuToggle.contains(event.target) && !navUl.contains(event.target) && navUl.classList.contains('active')) {
+                    navUl.classList.remove('active');
+                }
+            });
+        }
+    });
+</script>  

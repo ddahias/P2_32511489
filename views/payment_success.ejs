@@ -3,19 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pago Realizado</title>
+    <title><%= pageTitle %></title>
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Para que el footer se quede abajo */
+        }
+
+        .main-content {
+            flex-grow: 1; /* Ocupa el espacio restante */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0; /* Padding superior e inferior */
+            background-color: var(--color-background-light, #f4f4f4); /* Usa variable o fallback */
+        }
+
+        .success-container {
+            background-color: var(--color-white, #fff);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px; 
+            width: 90%; /* Ancho responsivo */
+            margin: auto; /* Centrar horizontalmente */
+        }
+
+        .success-container h1 {
+            color: var(--color-primary-blue, #0277bd); 
+            font-size: 2.5em; /* Título grande */
+            margin-bottom: 2rem;
+        }
+
+        .button-home {
+            display: inline-block;
+            background-color: var(--color-accent-yellow, #ffb300);
+            color: var(--color-text-dark, #333); 
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .button-home:hover {
+            background-color: var(--color-accent-yellow-hover, #ffc107); /* Amarillo al pasar el mouse */
+            opacity: 0.95;
+        }
+
+        /* Responsive básico para el contenedor de éxito */
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 2rem;
+            }
+            .success-container h1 {
+                font-size: 2.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .success-container {
+                padding: 1.5rem;
+            }
+            .success-container h1 {
+                font-size: 2em;
+            }
+            .button-home {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>¡Pago Realizado!</h1>
+        <nav class="container">
+            <div class="site-title">
+            </div>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/servicios">Servicios</a></li>
+                <li><a href="/contacto">Contacto</a></li>
+                </ul>
+        </nav>
     </header>
-    <section>
-        <p>Tu pago ha sido procesado con éxito.</p>
-        <p><a href="/">Volver a la página principal</a></p>
+
+    <section class="main-content">
+        <div class="success-container">
+            <h1>¡Pago Realizado con Éxito!</h1>
+            <a href="/" class="button-home">Volver al Inicio</a>
+        </div>
     </section>
+
     <footer>
-        <p>&copy; 2025 Alquiler de Equipos Deportivos</p>
+            <%- include('fragmen/footer.ejs')%> 
     </footer>
 </body>
 </html>

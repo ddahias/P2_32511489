@@ -1,19 +1,20 @@
 import sqlite3 from 'sqlite3';
 
-export interface ContactData { 
+export interface ContactData {
     name: string;
     email: string;
     comment: string;
-    ip_address?: string; 
+    ip_address?: string;
+    country?: string; 
 }
 
-export interface Contact extends ContactData { 
+export interface Contact extends ContactData {
     id: number;
     created_at: string;
 }
 
-class ContactsModel { 
-    private db: sqlite3.Database; 
+class ContactsModel {
+    private db: sqlite3.Database;
 
     constructor(db: sqlite3.Database) {
         this.db = db;
@@ -27,25 +28,29 @@ class ContactsModel {
             email TEXT NOT NULL,
             comment TEXT,
             ip_address TEXT,
-            created_at TEXT
+            country TEXT,     
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP 
         )`;
         this.db.run(sql, (err: Error | null) => {
             if (err) {
-                console.error('CALLBACK CREATE TABLE - ERROR:', err.message); 
+                console.error('CALLBACK CREATE TABLE - ERROR:', err.message);
             } else {
-                console.log('CALLBACK CREATE TABLE - ÉXITO: Tabla contacts lista o ya existía.'); 
+                console.log('CALLBACK CREATE TABLE - ÉXITO: Tabla contacts lista o ya existía.');
             }
         });
     }
 
     addContact(contactData: ContactData, callback: (err: Error | null, contactId?: number) => void): void {
-        const sql = `INSERT INTO contacts (name, email, comment, ip_address, created_at)
-                     VALUES (?, ?, ?, ?, ?)`;
-        const now = new Date().toISOString(); 
+        const sql = `INSERT INTO contacts (name, email, comment, ip_address, country, created_at)
+                     VALUES (?, ?, ?, ?, ?, ?)`;
+        const now = new Date().toISOString();
+        
+         console.log('Valores a insertar en la DB:', [contactData.name, contactData.email, contactData.comment, contactData.ip_address || null, contactData.country || null, now]);
+
         console.log('contacto guardado');
         this.db.run(
             sql,
-            [contactData.name, contactData.email, contactData.comment, contactData.ip_address || null, now], 
+            [contactData.name, contactData.email, contactData.comment, contactData.ip_address || null, contactData.country || null, now],
             function(this: sqlite3.RunResult, err: Error | null) {
                 if (err) {
                     console.error('Error al ejecutar INSERT:', err.message);
@@ -57,9 +62,9 @@ class ContactsModel {
     }
 
     getAllContacts(callback: (err: Error | null, contacts?: Contact[]) => void): void {
-        const sql = `SELECT id, name, email, comment, ip_address, created_at FROM contacts ORDER BY created_at DESC`;
+        const sql = `SELECT id, name, email, comment, ip_address, country, created_at FROM contacts ORDER BY created_at DESC`;
 
-        this.db.all(sql, [], (err: Error | null, rows: any[]) => { 
+        this.db.all(sql, [], (err: Error | null, rows: any[]) => {
             if (err) {
                 console.error('Error al ejecutar SELECT:', err.message);
                 return callback(err);

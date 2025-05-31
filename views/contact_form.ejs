@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contáctanos</title>
     <link rel="stylesheet" href="/css/contacto.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPY841KFTW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MPY841KFTW'); </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
-<body>
+        <body>
     <%- include('fragmen/header.ejs')%>
     <header class="contact-header">
         <h1>¡Contáctanos!</h1>
-        <p>Déjanos tu mensaje y te responderemos en las proximas 12h.</p> </header>
+        <p>Déjanos tu mensaje y te responderemos en las proximas 12h.</p>
+    </header>
     <section class="contact-section">
         <form action="/contact/add" method="POST" id="contactForm" class="contact-form">
             <div class="form-row">
@@ -26,10 +35,35 @@
                 <label for="comment">Comentario:</label>
                 <textarea id="comment" name="comment"></textarea>
             </div>
+             <div class="g-recaptcha" data-sitekey=  6LfbEEcrAAAAAEaQyUoPs-WfEYWu-QY3GhCm4iRU ></div>
+        </div>
+
             <button type="submit">Enviar Mensaje</button>
         </form>
         <p class="return-link-paragraph"><a href="/">Volver a la página principal</a></p>
     </section>
     <%- include('fragmen/footer.ejs')%>
-</body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactForm = document.getElementById('contactForm'); // Asegúrate que el ID coincida
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', () => {
+                    // Asegúrate de que 'gtag' esté disponible (cargado desde tu header.ejs)
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'form_submission', {
+                            'event_category': 'Contacto',
+                            'event_label': 'Formulario de contacto enviado',
+                            'value': 1
+                        });
+                        console.log('Evento de Google Analytics enviado: form_submission');
+                    } else {
+                        console.warn('gtag no está definido. ¿El script de Google Analytics se cargó correctamente en el header?');
+                    }
+                });
+            }
+        });
+    </script>
+    </body>
 </html>

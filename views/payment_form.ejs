@@ -7,19 +7,21 @@
     <link rel="stylesheet" href="/css/pago.css">
 </head>
 <body>
+      <%- include('fragmen/header.ejs')%>
     <header class="payment-header">
         <h1>Realizar Pago</h1>
         <p>Selecciona el servicio y completa los datos de pago.</p>
     </header>
     <section class="payment-section">
-        <form action="/payment/add" method="POST" id="paymentForm" class="payment-form">
+        <form action="/payment/process" method="POST" id="paymentForm" class="payment-form">
             <div class="form-row">
                 <label for="servicio">Servicio:</label>
+               
                 <select id="servicio" name="servicio" required>
-                    <option value="">-- Seleccionar Servicio --</option> <option value="bicicleta">Alquiler de Bicicleta</option>
-                    <option value="kayak_individual">Alquiler de Kayak Individual</option>
-                    <option value="kayak_doble">Alquiler de Kayak Doble</option>
-                    <option value="recorrido">Recorrido</option>
+                    <option value="">-- Seleccionar Servicio --</option>     
+                    <option value="bicicleta">Alquiler de Bicicletas.</option>
+                    <option value="kayak_individual">Alquiler de Kayaks.</option>
+                    <option value="recorrido">Recorrido Turistico.</option>
                 </select>
             </div>
             <div class="form-row">
@@ -37,7 +39,7 @@
     
             <div class="form-row expiration-cvv-group">
                 <div class="exp-date-fields">
-                     <label>Fecha de Expiración:</label> {/* Una sola etiqueta para el grupo */}
+                     <label>Fecha de Expiración:</label> 
                      <div class="exp-inputs">
                          <select id="exp_mes" name="exp_mes" required>
                              <option value="">Mes</option> {/* Opción por defecto */}
@@ -55,7 +57,7 @@
                 </div>
                 <div class="cvv-field">
                      <label for="cvv">Código de Seguridad (CVV/CVC):</label>
-                     <input type="text" id="cvv" name="cvv" required autocomplete="off"> {/* Añadir autocomplete off */}
+                     <input type="text" id="cvv" name="cvv" required autocomplete="off">
                 </div>
             </div>
             <div class="form-row">
