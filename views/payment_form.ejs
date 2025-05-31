@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Pago</title>
+    <link rel="stylesheet" href="/css/pago.css">
+</head>
+<body>
+    <header class="payment-header">
+        <h1>Realizar Pago</h1>
+        <p>Selecciona el servicio y completa los datos de pago.</p>
+    </header>
+    <section class="payment-section">
+        <form action="/payment/add" method="POST" id="paymentForm" class="payment-form">
+            <div class="form-row">
+                <label for="servicio">Servicio:</label>
+                <select id="servicio" name="servicio" required>
+                    <option value="">-- Seleccionar Servicio --</option> <option value="bicicleta">Alquiler de Bicicleta</option>
+                    <option value="kayak_individual">Alquiler de Kayak Individual</option>
+                    <option value="kayak_doble">Alquiler de Kayak Doble</option>
+                    <option value="recorrido">Recorrido</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-row">
+                <label for="nombre_titular">Nombre del Titular:</label>
+                <input type="text" id="nombre_titular" name="nombre_titular" required>
+            </div>
+            <div class="form-row">
+                <label for="numero_tarjeta">Número de Tarjeta:</label>
+                <input type="text" id="numero_tarjeta" name="numero_tarjeta" required>
+            </div>
+    
+            <div class="form-row expiration-cvv-group">
+                <div class="exp-date-fields">
+                     <label>Fecha de Expiración:</label> {/* Una sola etiqueta para el grupo */}
+                     <div class="exp-inputs">
+                         <select id="exp_mes" name="exp_mes" required>
+                             <option value="">Mes</option> {/* Opción por defecto */}
+                             <% for (let i = 1; i <= 12; i++) { %>
+                                  <option value="<%= i < 10 ? '0' + i : i %>"><%= i < 10 ? '0' + i : i %></option>
+                             <% } %>
+                         </select>
+                         <select id="exp_anio" name="exp_anio" required>
+                              <option value="">Año</option> {/* Opción por defecto */}
+                             <% for (let i = new Date().getFullYear(); i < new Date().getFullYear() + 10; i++) { %>
+                                  <option value="<%= String(i).slice(-2) %>"><%= i %></option>
+                             <% } %>
+                         </select>
+                     </div>
+                </div>
+                <div class="cvv-field">
+                     <label for="cvv">Código de Seguridad (CVV/CVC):</label>
+                     <input type="text" id="cvv" name="cvv" required autocomplete="off"> {/* Añadir autocomplete off */}
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="monto">Monto a Pagar:</label>
+                <input type="number" id="monto" name="monto" min="0.01" step="0.01" required>
+            </div>
+            <div class="form-row">
+                <label for="moneda">Moneda:</label>
+                <select id="moneda" name="moneda" required>
+                     <option value="USD">USD</option>
+                     <option value="VES">VES</option>
+                </select>
+            </div>
+    
+            <button type="submit">Realizar Pago</button>
+        </form>
+        <p class="return-link-paragraph"><a href="/">Volver a la página principal</a></p>
+    </section>
+    <%- include('fragmen/footer.ejs')%>
+</body>
+</html>

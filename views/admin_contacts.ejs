@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos Registrados</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    
+</head>
+<body>
+    <%- include('fragmen/header.ejs')%>
+    <h1>tabla contactos</h1>
+        <section class="contacts-table-section">
+            <div class="table-responsive">
+                <table class="contacts-table">
+                    <thead>
+                        <tr id="encabezado">
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Comentario</th>
+                            <th>IP</th>
+                            <th>Fecha y Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (contacts && contacts.length > 0) { %>
+                            <% contacts.forEach(contact => { %>
+                                <tr>
+                               <td><%= contact.id %></td>
+                                <td><%= contact.nombre %></td> 
+                                <td><%= contact.email %></td>
+                                <td><%= contact.comentario %></td> 
+                                <td><%= contact.ip_address %></td>
+                                <td><%= contact.created_at %></td>
+                                </tr>
+                            <% }); %>
+                        <% } else { %>
+                        <tr><td colspan="6" style="text-align: center;">No hay contactos registrados.</td></tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div> <p class="return-link-paragraph"><a href="/">Volver a la página principal</a></p>
+        </section>
+    <%- include('fragmen/footer.ejs')%>
+</body>
+</html>

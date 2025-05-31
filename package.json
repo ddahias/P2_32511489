@@ -3,15 +3,31 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start":"node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "dev": "npm run build && npm run start"
   },
   "keywords": [],
   "author": "Dahiams",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "express-session": "^1.18.1"
+  },
+  "devDependencies": {
+    "@types/connect-flash": "^0.0.40",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^5.0.1",
+    "@types/express-session": "^1.18.1",
+    "@types/node": "^22.15.3",
+    "@types/sqlite3": "^3.1.11",
+    "@types/strip-bom": "^3.0.0",
+    "@types/strip-json-comments": "^0.0.30",
+    "sqlite3": "^5.1.7",
+    "typescript": "^5.8.3"
   }
 }

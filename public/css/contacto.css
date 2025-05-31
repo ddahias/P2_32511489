@@ -1,0 +1,225 @@
+/* --- Estilos Generales para la página de Contacto --- */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333; /* Texto principal oscuro */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Fondo gris claro */
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #0277bd; /* Azul para enlaces */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #01579b;
+    text-decoration: underline;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* --- Estilos del Header (asumiendo estilos similares al resto de la web) --- */
+/* Si el header ya está estilizado en otro CSS, es posible que no necesites esto aquí */
+.site-title h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.site-title a {
+    text-decoration: none;
+    color: #333;
+}
+
+nav {
+    background-color: #005F73; /* Azul oscuro para la navegación */
+    padding: 15px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    color: #fff; /* Texto blanco en la navegación */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffb300; /* Amarillo al pasar el mouse */
+}
+
+/* --- Estilos específicos de la página de Contacto --- */
+.contact-header {
+    background-color: #e0f2f7; /* Azul claro para el encabezado de contacto */
+    text-align: center;
+    padding: 3rem 0 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.contact-header h1 {
+    color: #0277bd; /* Azul para el título */
+    margin-bottom: 0.8rem;
+    font-size: 2.5rem;
+}
+
+.contact-header p {
+    color: #555; /* Gris para el párrafo */
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0.8rem auto 0 auto;
+}
+
+.contact-section {
+    padding: 2rem 0;
+    background-color: #fff; /* Fondo blanco para la sección del formulario */
+}
+
+#contactForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    margin-bottom: 1.8rem;
+}
+
+.form-row label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: bold;
+    color: #555;
+    font-size: 1rem;
+}
+
+#contactForm input[type="text"],
+#contactForm input[type="email"],
+#contactForm textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ccc; /* Borde gris */
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#contactForm input[type="text"]:hover,
+#contactForm input[type="email"]:hover,
+#contactForm textarea:hover {
+    border-color: #a0a0a0;
+}
+
+#contactForm input[type="text"]:focus,
+#contactForm input[type="email"]:focus,
+#contactForm textarea:focus {
+    border-color: #0277bd; /* Azul al enfocar */
+    outline: none;
+    box-shadow: 0 0 5px rgba(2, 119, 189, 0.5);
+}
+
+#contactForm textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+#contactForm button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: #ffb300; /* Amarillo para el botón */
+    color: #333; /* Texto oscuro en el botón */
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+#contactForm button[type="submit"]:hover {
+    background-color: #ffc107;
+    opacity: 0.95;
+}
+
+.return-link-paragraph {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.return-link-paragraph a {
+    color: #0277bd;
+    font-weight: bold;
+}
+
+/* --- Estilos del Footer (asumiendo estilos similares al resto de la web) --- */
+footer {
+    background-color: #333; /* Gris oscuro para el footer */
+    color: #fff;
+    text-align: center;
+    padding: 2.5rem 0;
+    margin-top: 4rem;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin: 0.6rem 0;
+}
+
+footer a {
+    color: #fff;
+    margin: 0 12px;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ccc;
+}
+
+/* --- Responsive básico --- */
+@media (max-width: 768px) {
+    .contact-header h1 {
+        font-size: 2rem;
+    }
+    .contact-header p {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+    #contactForm {
+        padding: 1.5rem;
+    }
+    .form-row label {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-header h1 {
+        font-size: 1.8rem;
+    }
+}

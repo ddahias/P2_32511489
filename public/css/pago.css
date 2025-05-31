@@ -1,0 +1,68 @@
+/* --- Estilos para la Página de Realizar Pago --- */
+
+/* Estilos para el header de la página de pago */
+/* Si el header principal ya tiene estilos, asegúrate de que este no cause conflicto */
+/* Puedes añadir una clase como <header class="payment-header"> en tu HTML */
+.payment-header {
+    text-align: center; /* Centra el texto */
+    padding: 3rem 0 2rem 0; /* Espaciado */
+    background-color: #e0f2f7; /* Fondo azul claro */
+    margin-bottom: 2rem; /* Espacio debajo */
+}
+
+.payment-header h1 {
+    color: #0277bd; /* Color del título */
+    margin-bottom: 0.8rem;
+    font-size: 2.5rem;
+}
+
+.payment-header p {
+    color: #555; /* Color del párrafo */
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0.8rem auto 0 auto;
+}
+
+/* Estilos para la sección que contiene el formulario */
+/* Puedes añadir una clase como <section class="payment-section"> en tu HTML */
+.payment-section {
+    padding: 2rem 0; /* Espaciado arriba y abajo */
+}
+
+/* Estilos para el formulario de pago en sí */
+/* !!! NOTA: Tu HTML usa id="contactForm" para este formulario. */
+/* Para evitar conflictos con estilos del formulario de contacto, es MUY RECOMENDABLE */
+/* cambiar el ID en tu HTML a algo como id="paymentForm". El CSS aquí usará #paymentForm. */
+/* Si no cambias el ID en el HTML, ajusta los selectores en el CSS a #contactForm. */
+#paymentForm { /* Usa el ID del formulario */
+    max-width: 600px; /* Ancho máximo */
+    margin: 0 auto; /* Centra horizontalmente */
+    padding: 2.5rem; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde */
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: #fff; /* Fondo blanco */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra */
+}
+
+/* Estilos para cada grupo de campo (div que contiene label e input/select) */
+#paymentForm div {
+    margin-bottom: 1.8rem; /* Espacio entre cada campo */
+}
+
+/* Estilos para las etiquetas (labels) */
+#paymentForm label {
+    display: block; /* Hace que la etiqueta ocupe su propia línea */
+    margin-bottom: 0.6rem; /* Espacio debajo */
+    font-weight: bold; /* Negrita */
+    color: #555;
+    font-size: 1rem;
+}
+
+/* Estilos para los campos de entrada (email, text, number) y selects */
+#paymentForm input[type="email"],
+#paymentForm input[type="text"],
+#paymentForm input[type="number"],
+#paymentForm select {
+    width: 100%; /* Ancho completo */
+    padding: 1rem; /* Espaciado interno */
+    border: 1px solid #ccc;}

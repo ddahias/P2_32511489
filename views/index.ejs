@@ -1,123 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alquiler de Equipo deportivos - Puerto Colombia </title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- Enlace al archivo CSS -->
+    <title>Alquiler de Equipo deportivo - Puerto Colombia </title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <header>
-        <h1>Alquiler de Equipo Deportivo (Bicicletas, Kayaks) en Playa Grande !! </h1>
-        <p>Explora la bellezas de Playa Grande Ubicada en Puerto 
-        Colombia.</p>
-        <p> #Aragua sports cyclists and kayaks</p>
-        <div class="header-images">
-            <img src="img/proteccion.jpg" alt="Bicicleta montañera">
-            <img src="img/bici-paseo.jpg" alt="Bicicleta de paseo">
-            <img src="img/kayy.jpg" alt="Bicicleta de paseo">
-        
-        </div>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#precios">Precios</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-            <li><a href="#recorrido">Recorrido</a></li>
-        </ul>
-    </nav>
+    <%- include('fragmen/header.ejs')%>
     <main>
-        <section id=" 1er servicio">
-            <h2>1er Servicio</h2>
-            <p>Ofrecemos para el equipamiento en bicicletas: Proteccion como cascos, rodilleras y coderas, guantes, lentes de proteccion, para prevenciones: tambien kit de emergencias basicos (todo lo mencionado puede ser opcional)</p>
-            
-            <ul>
-                <li>Tenemos diferentes maneras para que pases un dia al aire libre espectacular !! Puedes elegir entre:</li>
-                <li>Bicicletas montañera </li>
-                <li>Bicicletas de paseo</li>
-                <li>Rutas guiadas</li>
-            </ul>
-            <div class="1er servicio-image">
-                <img src="img/DDD.jpg" alt="Vista de la playa">
-                <img src="img/ESCU.jpg" alt="Vista de la playa">
+        <section id="hero" class="hero">
+            <div class="container hero__content">
+                <h2>Tu Aventura Comienza Aquí</h2>
+                <p>Alquila el mejor equipo deportivo y descubre las rutas turísticas más emocionantes.</p>
             </div>
-    
-        <section id="2do servicio">
-            <h2>2do Servicio</h2>
-            <p>Ofrencemos para el equipamiento de los kayas: 
-            Proteccion como calzados antideslizante, silvato de emergencias, cascos, chaleco salvavidas (todo lo menciono es opcional).  </p>
-            <ul>
-                <li>Tambien ofrecemos diversos tipos de recorrido en kayaks !! Puedes elegir entre:</li>
-                <li>Kayaks tandem</li>
-                <li>kayaks de paseo </li>
-                <li>Rutas guiadas</li>
-            </ul>
-
-             <div class="2do servicio-image">
-                <img src="img/kaya.jpg" alt="Vista de la playa">
-            </div>
-        </section>
-
-        <section id="Precios del Alquiler de las bicicletas">
-            <h2>Precios</h2>
-            <p>Opciones accesibles para disfrutar de un dia genial y soleado:</p>
-            <ul>
-                <li>Bicicleta de montaña: $8 por día</li>
-                <li>Bicicleta de paseo: $6 por día</li>
-                <li>Ruta guiada: $12 por persona</li>
-            </ul>
-        </section>
+            <div class="header-images">
+            <img src="img/bicicletas-footer.jpg" alt="Bicicleta de paseo">
+            <img src="img/playa.jpg" alt="Bicicleta de paseo">
         
-        <style>
-    .1er-servicio-image, .2do-servicio-image {
-        display: flex; /* Utilizamos flexbox */
-        gap: 10px; /* Espaciado entre las imágenes */
-        justify-content: center; /* Centra las imágenes */
-        align-items: center; /* Alinea las imágenes verticalmente */
-    }
+        </div>
 
-    .1er-servicio-image img, .2do-servicio-image img {
-        width: 45%; /* Ajusta el tamaño de las imágenes */
-        border-radius: 8px; /* Opcional: añade bordes redondeados para estética */
-    }
-        </style>
-
-        <section id="Precios del Alquiler de los Kayaks">
-            <h2>Precios</h2>
-            <p>Opciones accesibles para disfrutar de un dia traquilo y emocionante:</p>
-            <ul>
-                <li>kayaks tandem: $10 por día</li>
-                <li>kayaks de paseo: $5 por día</li>
-                <li>Ruta guiada: $15 por persona</li>
-            </ul>
         </section>
 
-        <section id="recorrido">
-            <h2>Recorrido</h2>
-            <p>Descubre como llegar a Puerto Colombia, recorriendo el Parque Herri Pittier y todo su alrededores verdes y su clima frio.</p>
-            <div class="recorrido-image">
-                <img src="img/recorrido.jpg" alt="Imagen del recorrido hacia la playa">
+        <section id="equipment" class="equipment">
+            <div class="container">
+                <h2>Alquiler de Equipo Deportivo</h2>
+                <p class="equipment__description" style="text-align: center; margin-bottom: 3rem;">Tenemos todo lo que necesitas para tu próxima aventura: bicicletas, kayaks y rutas guiadas.</p>
+                <div class="grid equipment__grid">
+                    <div class="item equipment__item">
+                        <img src="img/bici-paseo.jpg" alt="Imagen de una bicicleta de montaña">
+                        <h3>Bicicletas</h3>
+                        <p>Variedad para montaña y de paseo.</p>
+                    </div>
+                    <div class="item equipment__item">
+                        <img src=" /img/kayy.jpg" alt="Imagen de un kayak">
+                        <h3>Kayaks<h3>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="contacto">
-            <h2>Contacto</h2>
-            <p>Contáctanos para daber mas imformacion: </p>
-            <p>Email: Araguasports@gmail.com</p>
-            <p>Teléfono: +58 412 108 2567</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; Elige nuestra empresa y pasaras una dia increibe- no olvides tenemos todas las protecciones necesarias por tu seguridad- Estamos ubicados en el Estado Aragua, M 
-        Playa Grande.</p>
-        <p> #Aragua sports cyclists and kayaks</p>
-        <div class="footer-images">
-            <img src="img/playa-footer.jpg" alt="Vista de la playa al atardecer">
-            <img src="img/bicicletas-footer.jpg" alt="Bicicletas estacionadas">
-            <img src="img/playa.jpg" alt="Bicicletas estacionadas">
 
+<section id="routes" class="routes">
+    <div class="container">
+        <h2>Rutas Turísticas</h2>
+        <p class="routes__description" style="text-align: center; margin-bottom: 3rem;">Descubre la belleza local con nuestras rutas guiadas.</p>
+        <div class="routes__image-placeholder" style="text-align: center; padding: 2rem; border: 1px dashed #ccc; margin-bottom: 2rem;">
+
+            <img src="/img/reno.jpg" alt="Imagen de Rutas Turísticas">
         </div>
+        <p style="text-align: center;"><a href="/rutas" class="btn">Ver Todas Las Rutas</a></p>
+    </div>
+</section>
+
+
+        <section id="contact-cta" class="contact-cta" style="text-align: center; padding: 4rem 0; background-color: #e0f2f7;">
+            <div class="container contact-cta__content">
+                <h2>¿Listo para tu Próxima Aventura?</h2>
+                <p>Contáctanos para más información o para reservar tu equipo o ruta.</p>
+                <a href="/contacto" class="btn">Contactar</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <%- include('fragmen/footer.ejs')%> 
     </footer>
 </body>
 </html>

@@ -1,35 +1,13 @@
-/* Estilo general */
 body {
-    background-color: blueviolet; /* Fondo claro */
+    background-color: #0077cc; /* Fondo claro */
     color: #333; /* Texto oscuro */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* Encabezado */
-header {
-    background-color: blueviolet; /* Azul vivo */
-    color: #FFFFFF; /* Texto blanco */
-    padding: 20px;
-    text-align: center;
-}
-
-header p {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.header-images img {
-    width: 180px; /* Incrementa ligeramente el tamaño */
-    height: auto;
-    margin: 5px;
-    border-radius: 10px;
-}
-
-/* Menú de navegación */
 nav {
-    background-color: #005F73; /* Azul oscuro */
+    background-color: #005F73;
     padding: 15px;
     text-align: center;
 }
@@ -52,63 +30,25 @@ nav a {
 }
 
 nav a:hover {
-    color: #FFD700; /* Amarillo */
+    color: #FFD700;
 }
 
-/* Contenedor principal */
-main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Secciones */
 section {
-    background-color: #E0F7FA; /* Azul claro */
+    background-color: #ffffff; /* Fondo blanco */
     padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
+    margin: 20px auto; /* Centra las secciones */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4); /* Sombra más grande y profunda */
+    width: 80%;
 }
 
-section h2 {
-    color: #005F73; /* Azul oscuro */
-    text-decoration: underline; /* Subraya los títulos */
+.routes__image-placeholder img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
-.servicios-image img, .recorrido-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-/* Lista de servicios y precios */
-ul {
-    list-style-type: square;
-    padding-left: 20px;
-}
-
-ul li {
-    font-size: 18px;
-}
-
-/* Contacto */
-#contacto p {
-    font-size: 16px;
-}
-
-/* Pie de página */
 footer {
-    background-color: #005F73;
-    color: #FFFFFF;
-    text-align: center;
-    padding: 15px;
-    font-size: 16px;
-}
-
-.footer-images img {
-    width: 180px; /* Incrementa ligeramente el tamaño */
-    height: auto;
-    margin: 5px;
-    border-radius: 10px;
+    background-color: brown;
 }
