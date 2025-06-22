@@ -1,0 +1,117 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Usuario</title>
+    <link rel="stylesheet" href="/css/styles.css">     
+    <link rel="stylesheet" href="/css/admin.css"> 
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--color-light-green);
+            padding: 20px;
+        }
+        .auth-box {
+            background-color: var(--color-white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px var(--color-shadow-medium);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        .auth-box h2 {
+            color: var(--color-primary-teal);
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--color-dark-blue);
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--color-soft-green);
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+        .form-control:focus {
+            border-color: var(--color-primary-teal);
+            outline: none;
+            box-shadow: 0 0 5px rgba(9, 115, 138, 0.5);
+        }
+        .btn-auth {
+            background-color: var(--color-primary-teal);
+            color: var(--color-white);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn-auth:hover {
+            background-color: var(--color-dark-blue);
+        }
+        .error-message {
+            color: #dc3545;
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .success-message {
+            color: #28a745;
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <%- include('fragmen/header.ejs') %>
+    <main>
+        <div class="auth-box">
+            <h2>Registrar Nuevo Usuario</h2>
+            <form action="/register" method="POST">
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" name="username" class="form-control" required autocomplete="new-username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" class="form-control" required autocomplete="new-password">
+                </div>
+                <button type="submit" class="btn-auth">Registrar</button>
+            </form>
+            <% if (messages.error && messages.error.length > 0) { %>
+                <p class="error-message"><%= messages.error[0] %></p>
+            <% } %>
+            <% if (messages.success && messages.success.length > 0) { %>
+                <p class="success-message"><%= messages.success[0] %></p>
+            <% } %>
+        </div>
+    </main>
+    <%- include('fragmen/footer.ejs') %>
+</body>
+</html>

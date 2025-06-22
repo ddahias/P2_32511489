@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="/css/styles.css">
+     <link rel="stylesheet" href="/css/login.css">
+     <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <%- include('fragmen/header.ejs') %>
+    <main>
+        <div class="auth-box">
+            <h2>Iniciar Sesión</h2>
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" name="username" class="form-control" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" class="form-control" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-auth">Entrar</button>
+            </form>
+            <% if (messages.error && messages.error.length > 0) { %>
+                <p class="error-message"><%= messages.error[0] %></p>
+            <% } %>
+            <% if (messages.success && messages.success.length > 0) { %>
+                <p class="success-message"><%= messages.success[0] %></p>
+            <% } %>
+
+            <!-- Este es el placeholder para el botón de Google OAuth, lo haremos después -->
+            <!-- <button class="btn-auth google-btn" style="background-color: #DB4437; margin-top: 20px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png" alt="Google Logo" style="height: 20px; width: 20px; margin-right: 10px;">
+                Iniciar con Google
+            </button> -->
+        </div>
+    </main>
+    <%- include('fragmen/footer.ejs') %>
+</body>
+</html>

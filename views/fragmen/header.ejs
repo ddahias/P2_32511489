@@ -1,41 +1,49 @@
-<link rel="stylesheet" href="/css/header.css">
-<head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPY841KFTW"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<link rel="stylesheet" href="/css/styles.css"> 
+<link rel="stylesheet" href="/css/header.css"> 
 
-      gtag('config', 'G-MPY841KFTW');
-    </script>
-    </head>
-<nav>
-    <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+<header>
+    <nav class="container">
+        <div class="site-title">
+            <h1><a href="/">Alquiler de Equipo deportivo</a></h1>
+        </div>
 
-    <ul>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/servicios">Servicios</a></li>
-        <li><a href="/contacto">Contacto</a></li>
-        <li><a href="/admin/contacts">Ver Contactos</a></li>
-    </ul>
-</nav>
+        <button class="menu-toggle" aria-label="Abrir menú">☰</button>
+
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/servicios">Servicios</a></li>
+            <li><a href="/contacto">Contacto</a></li>
+
+            <% if (isAuthenticated) { %>
+                <li><a href="#">Hola, <%= username %>!</a></li>
+                <% if (isAdmin) { %>
+                    <li><a href="/register">Registrar Usuario</a></li>
+                    <li><a href="/admin/contacts">Ver Contactos</a></li>
+                    <li><a href="/admin/Pagos Registrados"> Ver Registro de Pagos</a></li>
+                <% } %>
+                <li><a href="/logout">Cerrar Sesión</a></li>
+            <% } else { %>
+                <li><a href="/login">Iniciar Sesión</a></li>
+            <% } %>
+        </ul>
+    </nav>
+</header>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const menuToggle = document.querySelector('.menu-toggle');
-        const navUl = document.querySelector('nav ul'); // Selecciona la lista de navegación
+        const navUl = document.querySelector('nav ul');
 
         if (menuToggle && navUl) {
             menuToggle.addEventListener('click', () => {
-                navUl.classList.toggle('active'); // Alterna la clase 'active' para mostrar/ocultar el menú
+                navUl.classList.toggle('active');
             });
 
             document.addEventListener('click', (event) => {
-                // Si el clic no fue en el botón de hamburguesa ni dentro del menú, y el menú está abierto
                 if (!menuToggle.contains(event.target) && !navUl.contains(event.target) && navUl.classList.contains('active')) {
                     navUl.classList.remove('active');
                 }
             });
         }
     });
-</script>  
+</script>

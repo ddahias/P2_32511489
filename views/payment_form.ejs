@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Realizar Pago</title>
     <link rel="stylesheet" href="/css/pago.css">
+
 </head>
 <body>
       <%- include('fragmen/header.ejs')%>
@@ -44,13 +45,13 @@
                          <select id="exp_mes" name="exp_mes" required>
                              <option value="">Mes</option> {/* Opción por defecto */}
                              <% for (let i = 1; i <= 12; i++) { %>
-                                  <option value="<%= i < 10 ? '0' + i : i %>"><%= i < 10 ? '0' + i : i %></option>
+                             <option value="<%= i < 10 ? '0' + i : i %>"><%= i < 10 ? '0' + i : i %></option>
                              <% } %>
                          </select>
                          <select id="exp_anio" name="exp_anio" required>
                               <option value="">Año</option> {/* Opción por defecto */}
                              <% for (let i = new Date().getFullYear(); i < new Date().getFullYear() + 10; i++) { %>
-                                  <option value="<%= String(i).slice(-2) %>"><%= i %></option>
+                        <option value="<%= String(i).slice(-2) %>"><%= i %></option>
                              <% } %>
                          </select>
                      </div>

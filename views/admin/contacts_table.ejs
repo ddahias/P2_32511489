@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Contactos - Alquiler de Equipo deportivo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPY841KFTW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-MPY841KFTW');
+    </script>
+</head>
+<body>
+    <%- include('../fragmen/header.ejs') %>
+
+    <main class="admin-main">
+        <div class="container admin-container">
+            <h1>Administrar Envíos de Contacto</h1>
+
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar por nombre o email...">
+                <button id="clearSearch">Limpiar</button>
+            </div>
+
+            <div class="table-responsive">
+                <table class="contacts-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Mensaje</th>
+                            <th>IP</th>
+                            <th>País</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contactsTableBody">
+                        <% if (contacts && contacts.length > 0) { %>
+                            <% contacts.forEach(contact => { %>
+                                <tr>
+                                    <td><%= contact.id %></td>
+                                    <td><%= contact.name %></td>
+                                    <td><%= contact.email %></td>
+                                    <td><%= contact.message %></td>
+                                    <td><%= contact.ip_address || 'N/A' %></td>
+                                    <td><%= contact.country || 'N/A' %></td>
+                                    <td><%= new Date(contact.created_at).toLocaleString() %></td>
+                                </tr>
+                            <% }); %>
+                        <% } else { %>
+            
+                            <tr>
+                                <td colspan="7" class="no-data-cell">No hay ningún comentario registrado.</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="return-link-paragraph">
+                <a href="/admin/dashboard" class="btn">Volver al Dashboard</a>
+            </div>
+        </div>
+    </main>
+
+    <%- include('../fragmen/footer.ejs') %>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const clearSearchButton = document.getElementById('clearSearch');
+            const tableBody = document.getElementById('contactsTableBody');
+            const rows = tableBody ? Array.from(tableBody.querySelectorAll('tr')) : [];
+
+            const getTableRows = () => {
+                return Array.from(tableBody ? tableBody.querySelectorAll('tr:not(.no-data-cell)') : []);
+            };
+
+            const filterTable = () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const currentRows = getTableRows(); 
+
+                let hasVisibleRows = false;
+
+                currentRows.forEach(row => {
+                    const name = row.children[1] ? row.children[1].textContent?.toLowerCase() : '';
+                    const email = row.children[2] ? row.children[2].textContent?.toLowerCase() : '';
+
+                    if (name.includes(searchTerm) || email.includes(searchTerm)) {
+                        row.style.display = ''; 
+
+                        hasVisibleRows = true;
+                    } else {
+                        row.style.display = 'none'; 
+                    }
+                });
+
+                const noDataRow = tableBody ? tableBody.querySelector('.no-data-cell') : null;
+                if (noDataRow) {
+                    if (searchTerm === '' && currentRows.length === 0) {
+    
+                        noDataRow.style.display = '';
+                    } else if (searchTerm !== '' && !hasVisibleRows) {
+    
+                        noDataRow.textContent = 'No se encontraron resultados para la búsqueda.';
+                        noDataRow.style.display = '';
+                    } else {
+                        noDataRow.style.display = 'none';
+                    }
+                }
+            };
+
+            if (searchInput && clearSearchButton && tableBody) {
+                searchInput.addEventListener('keyup', filterTable);
+
+                clearSearchButton.addEventListener('click', () => {
+                    searchInput.value = '';
+                    filterTable();
+                });
+            }
+
+            filterTable();
+        });
+    </script>
+
+    <style>
+        .no-data-cell {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            padding: 20px;
+        }
+    </style>
+</body>
+</html>

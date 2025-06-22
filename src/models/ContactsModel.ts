@@ -5,7 +5,7 @@ export interface ContactData {
     email: string;
     comment: string;
     ip_address?: string;
-    country?: string; 
+    country?: string;
 }
 
 export interface Contact extends ContactData {
@@ -28,8 +28,8 @@ class ContactsModel {
             email TEXT NOT NULL,
             comment TEXT,
             ip_address TEXT,
-            country TEXT,     
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP 
+            country TEXT,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
         )`;
         this.db.run(sql, (err: Error | null) => {
             if (err) {
@@ -45,7 +45,7 @@ class ContactsModel {
                      VALUES (?, ?, ?, ?, ?, ?)`;
         const now = new Date().toISOString();
         
-         console.log('Valores a insertar en la DB:', [contactData.name, contactData.email, contactData.comment, contactData.ip_address || null, contactData.country || null, now]);
+        console.log('Valores a insertar en la DB:', [contactData.name, contactData.email, contactData.comment, contactData.ip_address || null, contactData.country || null, now]);
 
         console.log('contacto guardado');
         this.db.run(

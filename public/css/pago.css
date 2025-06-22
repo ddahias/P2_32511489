@@ -4,7 +4,6 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
-    background-color: #f4f7f6;
 }
 
 *, *::before, *::after {
@@ -44,6 +43,12 @@ a:hover {
 
 .payment-section {
     padding: 2rem 0;
+}
+
+
+main {
+    background-color: transparent;
+    
 }
 
 #paymentForm {
