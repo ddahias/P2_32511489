@@ -1,123 +1,188 @@
-body {
-    /* Estos estilos ya deberían venir de styles.css, pero los dejo aquí si los necesitas como override */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-main {
-    flex-grow: 1; /* Permite que el main ocupe el espacio restante */
+.login-main {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-light-green); /* Usa tu color de fondo claro */
+    min-height: calc(100vh - var(--header-height) - var(--footer-height)); /* Ajusta para que ocupe el espacio disponible */
+    background-color: var(--color-background-light); /* Un color de fondo suave */
     padding: 20px;
+    box-sizing: border-box; /* Incluye padding en el ancho/alto */
 }
 
-/* Estilos para la caja del formulario de autenticación (login/registro) */
-.auth-box {
-    background-color: #ADD8E6; /* Fondo azul claro (usando tu verde grisáceo) */
+.login-container {
+    background-color: #ADD8E6;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 10px 25px var(--color-shadow-medium);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center; /* CENTRAMOS TODO EL CONTENIDO DEL CONTENEDOR */
+    max-width: 450px; /* Ancho máximo del formulario */
     width: 100%;
-    max-width: 450px; /* Ancho máximo para el formulario */
-    text-align: center;
+    animation: fadeInScale 0.5s ease-out; /* Animación de aparición */
 }
 
-.auth-box h2 {
-    color: var(--color-primary-teal); /* Usa tu color primario para los títulos */
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.login-container h1 {
+    color: var(--color-primary-teal);
     margin-bottom: 30px;
-    font-size: 2em;
+    font-size: 2.2em;
 }
 
-/* Estilos para cada grupo de formulario (label + input) */
-.form-group {
-    margin-bottom: 20px;
-    text-align: left; /* Alinea el texto de labels a la izquierda */
-}
-
-.form-group label {
-    display: block; /* Hace que el label ocupe su propia línea */
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: var(--color-dark-blue); /* Usa tu color de texto oscuro */
-}
-
-/* Estilos para los campos de entrada de texto e email/password */
-.form-control {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--color-soft-green); /* Borde con tu color suave */
-    border-radius: 5px;
-    font-size: 1em;
-    box-sizing: border-box; /* Importante para que el padding no aumente el ancho total */
-}
-
-/* Estilos al enfocar los campos de entrada */
-.form-control:focus {
-    border-color: var(--color-primary-teal); /* Borde turquesa al enfocar */
-    outline: none; /* Elimina el contorno predeterminado del navegador */
-    box-shadow: 0 0 5px rgba(9, 115, 138, 0.5); /* Sombra de enfoque sutil */
-}
-
-/* Estilos para el botón de autenticación (Entrar, Registrar) */
-.btn-auth {
-    background-color: var(--color-primary-teal); /* Fondo con tu color primario */
-    color: var(--color-white); /* Texto blanco */
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer; /* Indica que es cliqueable */
-    font-size: 1.1em;
-    width: 100%;
-    transition: background-color 0.3s ease; /* Transición suave para el hover */
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-/* Estilos al pasar el ratón sobre el botón de autenticación */
-.btn-auth:hover {
-    background-color: var(--color-dark-blue); /* Color más oscuro al pasar el ratón */
-}
-
-/* Estilos para mensajes de error */
-.error-message {
-    color: #dc3545; /* Rojo estándar para errores */
-    margin-top: 15px;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Estilos para mensajes de éxito */
+/* Mensajes de éxito y error */
 .success-message {
-    color: #28a745; /* Verde estándar para éxito */
-    margin-top: 15px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    text-align: center
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
     font-weight: bold;
-    text-align: center;
 }
 
-/* Estilos para el botón de Google (si lo activas más adelante) */
-.google-btn {
-    background-color: #DB4437; /* Google Red */
-    color: white;
-    padding: 12px 20px;
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Formulario de Login */
+.login-form .form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Alinea etiquetas a la izquierda */
+}
+
+.login-form label {
+    display: block; /* Cada etiqueta en su propia línea */
+    margin-bottom: 8px;
+    color: var(--color-dark-blue);
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--color-light-green);
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: var(--color-primary-teal);
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2); /* Sombra de enfoque azul suave */
+    outline: none;
+}
+
+.login-form .btn {
+    background-color: steelblue;
+    color: black;
     border: none;
-    border-radius: 5px;
+    padding: 12px 25px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 1.1em;
-    width: 100%;
-    margin-top: 15px;
-    transition: background-color 0.3s ease;
-    display: flex;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; 
+    margin-top: 10px; 
+}
+
+.login-form .btn:hover {
+    background-color: var(--color-dark-blue);
+    transform: translateY(-2px);
+}
+
+/* Sección de OAuth (Google, etc.) */
+.oauth-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-light-gray); /* Línea divisoria */
+}
+
+.oauth-section p {
+    color: var(--color-dark-blue);
+    margin-bottom: 15px;
+    font-size: 1em;
+}
+
+.google-btn {
+    background-color: #DB4437; /* Color de Google Rojo */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-flex; /* Para alinear el icono y el texto */
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centra el contenido dentro del botón */
+    gap: 12px;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Ocupa todo el ancho */
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
 }
+
 .google-btn:hover {
-    background-color: #C33027; /* Tono más oscuro de rojo Google */
+    background-color: #c0392b; /* Tono más oscuro al pasar el ratón */
+    transform: translateY(-2px);
 }
-.google-btn img {
-    margin-right: 10px;
-    height: 20px;
-    width: 20px;
+
+.google-btn .icon {
+    font-size: 1.4em; /* Tamaño más grande para el icono */
+    background-color: white;
+    color: #DB4437;
+    border-radius: 50%;
+    width: 30px; /* Tamaño del círculo del icono */
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: normal; /* El 'G' no debe ser bold para no verse raro */
+}
+
+/* Enlace de registro (para administradores) */
+.register-link-paragraph {
+    margin-top: 25px;
+    color: var(--color-dark-dark-blue);
+    font-size: 0.95em;
+}
+
+.register-link-paragraph a {
+    color: var(--color-primary-teal);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link-paragraph a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .login-container {
+        padding: 30px 20px; /* Reduce el padding en móviles */
+        margin: 20px; /* Añade margen alrededor del contenedor */
+    }
+
+    .login-container h1 {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+    }
+
+    .login-form .btn,
+    .google-btn {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
 }

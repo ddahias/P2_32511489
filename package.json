@@ -23,7 +23,9 @@
     "express": "^5.1.0",
     "express-session": "^1.18.1",
     "node-fetch": "^2.7.0",
-    "nodemailer": "^7.0.3"
+    "nodemailer": "^7.0.3",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
     "@types/axios": "^0.9.36",
@@ -36,6 +38,8 @@
     "@types/express-session": "^1.18.2",
     "@types/node": "^22.15.21",
     "@types/nodemailer": "^6.4.17",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.16",
     "@types/sqlite3": "^3.1.11",
     "@types/strip-bom": "^3.0.0",
     "@types/strip-json-comments": "^0.0.30",

@@ -17,14 +17,14 @@ class ContactsController {
     constructor(contactsModel: ContactsModel) {
         this.contactsModel = contactsModel;
         this.add = this.add.bind(this);
-        this.index = this.index.bind(this); // Asegura que 'this' se mantenga en los métodos de Express
+        this.index = this.index.bind(this);
         this.showContactForm = this.showContactForm.bind(this);
     }
 
     showContactForm(req: Request, res: Response): void {
         const successMessages = req.flash('success');
         const errorMessages = req.flash('error');
-        res.render('contact_form', { // Asegúrate de que este es el nombre correcto de tu vista de formulario de contacto
+        res.render('contact_form', {
             pageTitle: 'Contacto Ciclexpress',
             successMessage: successMessages.length > 0 ? successMessages[0] : null,
             errorMessage: errorMessages.length > 0 ? errorMessages[0] : null
@@ -40,7 +40,7 @@ class ContactsController {
         
         if (!recaptchaResponse) {
             console.warn('reCAPTCHA: No se recibió la respuesta de reCAPTCHA.');
-            (req.flash as any)('error', 'Por favor, completa la verificación reCAPTCHA.');
+            req.flash('error', 'Por favor, completa la verificación reCAPTCHA.');
             return res.redirect('/contacto');
         }
 
@@ -49,7 +49,7 @@ class ContactsController {
 
             if (!secretKey) {
                 console.error('ERROR: La variable de entorno RECAPI_SECRET_KEY no está definida.');
-                (req.flash as any)('error', 'Hubo un error de configuración del servidor. Intenta de nuevo más tarde.');
+                req.flash('error', 'Hubo un error de configuración del servidor. Intenta de nuevo más tarde.');
                 return res.redirect('/contacto');
             }
 
@@ -69,14 +69,14 @@ class ContactsController {
 
             if (!recaptchaData.success) {
                 console.warn('reCAPTCHA: Verificación fallida.', recaptchaData['error-codes']);
-                (req.flash as any)('error', 'Fallo en la verificación reCAPTCHA. Intenta de nuevo.');
+                req.flash('error', 'Fallo en la verificación reCAPTCHA. Intenta de nuevo.');
                 return res.redirect('/contacto');
             }
             console.log('reCAPTCHA: Verificación exitosa.');
 
         } catch (recaptchaError) {
             console.error('Error al verificar reCAPTCHA:', recaptchaError);
-            (req.flash as any)('error', 'Hubo un error al verificar reCAPTCHA. Intenta de nuevo.');
+            req.flash('error', 'Hubo un error al verificar reCAPTCHA. Intenta de nuevo.');
             return res.redirect('/contacto');
         }
 
@@ -102,18 +102,27 @@ class ContactsController {
         
         console.log('contactData FINAL para el modelo:', contactData);
 
-        this.contactsModel.addContact(contactData, (err: Error | null, contactId?: number) => {
-            console.log('Callback de addContact del modelo ejecutado');
-            if (err) {
-                console.error('Error al insertar contacto:', err.message);
-                (req.flash as any)('error', 'Hubo un error al guardar tu mensaje. Intenta de nuevo.');
-            } else {
-                console.log(`Contacto guardado con ID: ${contactId}, IP: ${ipAddress}, País: ${country}`);
-                (req.flash as any)('success', '¡Tu mensaje ha sido enviado con éxito!');
-        
-                const timestamp = new Date().toLocaleString();
+        // Envuelve la llamada a addContact en una promesa para usar await
+        try {
+            const result = await new Promise<{ id?: number, error?: string }>((resolve, reject) => {
+                this.contactsModel.addContact(contactData, (err: Error | null, contactId?: number) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve({ id: contactId });
+                    }
+                });
+            });
 
-                sendContactEmail({
+            console.log('Callback de addContact del modelo ejecutado');
+            console.log(`Contacto guardado con ID: ${result.id}, IP: ${ipAddress}, País: ${country}`);
+            req.flash('success', '¡Tu mensaje ha sido enviado con éxito!');
+            
+            const timestamp = new Date().toLocaleString();
+
+            // Intenta enviar el correo
+            try {
+                await sendContactEmail({
                     name: contactData.name,
                     email: contactData.email,
                     comment: contactData.comment,
@@ -121,26 +130,29 @@ class ContactsController {
                     country: contactData.country,
                     timestamp: timestamp
                 });
+                console.log('Correo de contacto enviado con éxito.');
+            } catch (emailError) {
+                console.error('Error al enviar el correo de contacto:', emailError);
+                // No detenemos la respuesta, solo registramos el error
             }
+
             res.redirect('/contact/success');
-        });
-        console.log('add terminado en ContactsController (pero el callback aún pendiente)');
+        } catch (err: any) { // Captura errores de addContact y geolocalización
+            console.error('Error al procesar el contacto:', err.message);
+            req.flash('error', 'Hubo un error al guardar tu mensaje. Intenta de nuevo.');
+            res.redirect('/contacto');
+        }
     }
 
-    /**
-     * Muestra la tabla de todos los contactos. Esta ruta es protegida.
-     */
     public async index(req: Request, res: Response): Promise<void> {
         try {
-            // Utiliza un callback en getAllContacts como está definido en tu modelo actual
             this.contactsModel.getAllContacts((err: Error | null, contacts?: Contact[]) => {
                 if (err) {
                     console.error('Error al obtener contactos para la tabla:', err.message);
                     req.flash('error', 'No se pudieron cargar los contactos.');
-                    // Asegúrate de que 'admin_dashboard' existe o redirige a la raíz
-                    res.redirect('/admin/dashboard'); 
+                    res.redirect('/admin/dashboard');
                 } else {
-                    res.render('admin/contacts_table', { contacts: contacts || [] }); // Asegura que siempre sea un array
+                    res.render('admin/contacts_table', { contacts: contacts || [] });
                 }
             });
         } catch (error) {

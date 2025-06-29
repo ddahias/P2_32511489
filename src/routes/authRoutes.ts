@@ -1,11 +1,12 @@
 import express, { Request, Response, NextFunction } from 'express';
 import db from '../db/database';
 import { hashPassword, comparePassword } from '../utils/authUtils';
-
+import passport from 'passport';
+import * as sqlite3 from 'sqlite3';
 const router = express.Router();
 
 export function isAuthenticated(req: Request, res: Response, next: NextFunction) {
-    if (req.session && req.session.userId) {
+    if ((req.isAuthenticated && req.isAuthenticated()) || (req.session && req.session.userId)) {
         return next();
     }
     req.flash('error', 'Por favor, inicia sesión para acceder a esta página.');
@@ -14,7 +15,7 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
 
 export function isAdmin(req: Request, res: Response, next: NextFunction) {
     if (req.session && req.session.userId) {
-        db.get('SELECT is_admin FROM users WHERE id = ?', [req.session.userId], (err, user: { is_admin: number } | undefined) => {
+        db.get('SELECT is_admin FROM users WHERE id = ?', [req.session.userId], (err: Error | null, user: { is_admin: number } | undefined) => {
             if (err) {
                 console.error('Error al verificar rol de admin:', err.message);
                 req.flash('error', 'Error al verificar tus permisos.');
@@ -27,6 +28,8 @@ export function isAdmin(req: Request, res: Response, next: NextFunction) {
                 res.status(403).redirect('/');
             }
         });
+    } else if (req.isAuthenticated && req.isAuthenticated() && req.user && req.user.is_admin === 1) {
+        return next();
     } else {
         req.flash('error', 'Por favor, inicia sesión como administrador.');
         res.redirect('/login');
@@ -51,7 +54,7 @@ router.post('/register', isAdmin, async (req: Request, res: Response) => {
     try {
         const hashedPassword = await hashPassword(password);
 
-        db.run('INSERT INTO users (username, password_hash) VALUES (?, ?)', [username, hashedPassword], function(err) {
+        db.run('INSERT INTO users (username, password_hash) VALUES (?, ?)', [username, hashedPassword], function(this: sqlite3.RunResult, err: Error | null) {
             if (err) {
                 if (err.message.includes('UNIQUE constraint failed')) {
                     req.flash('error', 'El nombre de usuario ya existe.');
@@ -87,7 +90,7 @@ router.post('/login', async (req: Request, res: Response) => {
         return res.redirect('/login');
     }
 
-    db.get('SELECT * FROM users WHERE username = ?', [username], async (err, user: any) => {
+    db.get('SELECT * FROM users WHERE username = ?', [username], async (err: Error | null, user: any) => {
         if (err) {
             console.error('Error al buscar usuario:', err.message);
             req.flash('error', 'Error interno del servidor. Inténtalo de nuevo.');
@@ -108,7 +111,7 @@ router.post('/login', async (req: Request, res: Response) => {
             console.log(`Usuario ${user.username} (ID: ${user.id}, Admin: ${req.session.isAdmin}) inició sesión.`);
 
             if (req.session.isAdmin) {
-                res.redirect('/admin/contacts'); // Redirige al admin directamente a la tabla de contactos
+                res.redirect('/admin/contacts');
             } else {
                 res.redirect('/');
             }
@@ -119,28 +122,53 @@ router.post('/login', async (req: Request, res: Response) => {
     });
 });
 
-router.get('/logout', (req: Request, res: Response) => {
-    req.session.destroy(err => {
-        if (err) {
-            console.error('Error al destruir la sesión:', err);
-            req.flash('error', 'Error al cerrar sesión. Inténtalo de nuevo.');
-        } else {
+router.get('/logout', (req: Request, res: Response, next: NextFunction) => {
+    if (req.logout) {
+        req.logout((err: any) => {
+            if (err) {
+                return next(err);
+            }
+            req.session.destroy(err => {
+                if (err) {
+                    console.error('Error al destruir la sesión después de logout de Passport:', err);
+                }
+                res.clearCookie('connect.sid');
+                req.flash('success', 'Has cerrado sesión exitosamente.');
+                res.redirect('/login');
+            });
+        });
+    } else {
+        req.flash('success', 'Has cerrado sesión exitosamente.');
+        req.session.destroy((err: Error) => {
+            if (err) {
+                console.error('Error al destruir la sesión:', err);
+            }
             res.clearCookie('connect.sid');
-            req.flash('success', 'Has cerrado sesión exitosamente.');
-        }
-        res.redirect('/login');
-    });
+            res.redirect('/login');
+        });
+    }
+});
+
+router.get('/auth/google', passport.authenticate('google', {
+    scope: ['profile', 'email']
+}));
+
+router.get('/auth/google/callback', passport.authenticate('google', {
+    failureRedirect: '/login',
+    failureFlash: true
+}), (req: Request, res: Response) => {
+    req.flash('success', `¡Bienvenido con Google, ${req.user?.username || 'usuario'}!`);
+    console.log(`Usuario ${req.user?.username} (ID: ${req.user?.id}) inició sesión con Google.`);
+    
+    if (req.user?.is_admin === 1) {
+        res.redirect('/admin/contacts');
+    } else {
+        res.redirect('/');
+    }
 });
 
 router.get('/admin/dashboard', isAuthenticated, isAdmin, (req: Request, res: Response) => {
-    res.send(`
-        <h1>Bienvenido al Dashboard de Administrador, ${req.session.username}!</h1>
-        <p>Tu ID de usuario es: ${req.session.userId}</p>
-        <p>Eres administrador: ${req.session.isAdmin ? 'Sí' : 'No'}</p>
-        <p>Esta es una página de ejemplo para administradores.</p>
-        <p><a href="/logout">Cerrar sesión</a></p>
-        <p><a href="/">Volver a la página principal</a></p>
-    `);
+    res.redirect('/admin/contacts');
 });
 
 export { router as authRouter };
